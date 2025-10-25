@@ -50,7 +50,7 @@ add_library(imgui
     # Add the backend implementation files
     extern/imgui/backends/imgui_impl_glfw.cpp
     extern/imgui/backends/imgui_impl_opengl3.cpp
- "src/ecs/ComponentManager.cpp")
+ "src/ecs/ComponentManager.cpp" "src/ecs/SystemManager.cpp")
 # The imgui lib needs to include its own headers and GLFW headers
 target_include_directories(imgui
     PUBLIC
@@ -80,7 +80,7 @@ add_library(NovaEngine
     # We will list all our engine's .cpp files here
     src/core/Engine.cpp
     src/ecs/EntityManager.cpp
- "src/ecs/ComponentManager.cpp")
+ "src/ecs/ComponentManager.cpp" "src/ecs/SystemManager.cpp")
 
 # Tell the Engine target where to find its own headers
 target_include_directories(NovaEngine
@@ -110,7 +110,7 @@ target_link_libraries(NovaEngine
 add_executable(NovaEngineDemo
     src/core/main.cpp
     src/demo/demo_game.cpp
- "src/ecs/ComponentManager.cpp")
+ "src/ecs/ComponentManager.cpp" "src/ecs/SystemManager.cpp")
 
 # The Demo needs to include the engine's public headers
 target_include_directories(NovaEngineDemo
