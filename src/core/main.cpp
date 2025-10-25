@@ -1,4 +1,5 @@
-#include "core/Engine.h"
+#include "Engine.h"
+#include "EngineConfig.h"
 #include <iostream>
 
 int main(int argc, char* argv[]) {
