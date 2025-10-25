@@ -5,6 +5,7 @@
 #include <memory>
 
 class Window;
+class RenderSystem;
 
 class Engine {
 public:
@@ -17,6 +18,7 @@ public:
 
     std::shared_ptr<Coordinator> m_coordinator;
     std::unique_ptr<Window> m_window;
+    std::shared_ptr<RenderSystem> m_renderSystem;
 
 private:
     void initSubsystems();

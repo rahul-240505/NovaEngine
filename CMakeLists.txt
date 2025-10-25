@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(NovaEngine VERSION 0.1.0 LANGUAGES CXX C)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -74,6 +74,8 @@ add_library(NovaEngine
     src/ecs/ComponentManager.cpp
     src/ecs/SystemManager.cpp
     src/renderer/Window.cpp
+    src/systems/RenderSystem.cpp
+    src/renderer/Shader.cpp
 )
 
 # --- Configure NovaEngine Includes ---

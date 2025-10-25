@@ -7,6 +7,7 @@
 
 #include "../ecs/Transform.h"
 #include "../ecs/SpriteRenderer.h"
+#include "../systems/RenderSystem.h"
 
 using std::cout;
 using std::cerr;
@@ -51,6 +52,9 @@ void Engine::run() {
 
 void Engine::shutdown() {
     cout << "Shutting down Engine." << endl;
+    if (m_renderSystem) {
+        m_renderSystem->shutdown();
+    }
     m_window->close();
     glfwTerminate();
     cout << "GLFW Terminated." << endl;
@@ -72,6 +76,17 @@ void Engine::registerComponents() {
 
 void Engine::registerSystems() {
     cout << "Registering systems..." << endl;
+
+    // Create the RenderSystem
+    m_renderSystem = m_coordinator->registerSystem<RenderSystem>();
+    m_renderSystem->init(m_coordinator);
+
+    // Set the Signature for the RenderSystem
+    // It's interested in entities with BOTH Transform and SpriteRenderer
+    Signature signature;
+    signature.set(m_coordinator->getComponentType<Transform>());
+    signature.set(m_coordinator->getComponentType<SpriteRenderer>());
+    m_coordinator->setSystemSignature<RenderSystem>(signature);
 }
 
 void Engine::processEvents() {
@@ -85,6 +100,8 @@ void Engine::update() {
 void Engine::render() {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Dark grey
     glClear(GL_COLOR_BUFFER_BIT);
+
+    m_renderSystem->update();
 
     m_window->swapBuffers();
 }
