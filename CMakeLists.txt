@@ -117,3 +117,13 @@ target_link_libraries(NovaEngineDemo
     PRIVATE
         NovaEngine
 )
+
+# --- Copy Assets to Output Directory ---
+# This command runs after the demo executable is built
+add_custom_command(TARGET NovaEngineDemo POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:NovaEngineDemo>/assets # Destination: Next to the .exe
+    COMMENT "Copying assets to output directory"
+    VERBATIM
+)
